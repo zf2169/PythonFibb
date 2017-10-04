@@ -7,12 +7,14 @@ Fibonacci sequence to that number or to the Nth number.
 """
 def fibb(n):
     '''
-    generate the n-th Fibonacci number using recursion
+    generate n-th Fibonacci Sequence number using recursion
+    using yield function can greatly decrease the running time
     '''
-    if n==1 or n==2:
-        return(1)
-    else:
-        return(fibb(n-1)+fibb(n-2))
+    a=1
+    b=1
+    for i in range(n):
+        yield a
+        a,b=b, a+b
 
 def upper(N):
     '''
@@ -21,7 +23,7 @@ def upper(N):
     '''
     i=1
     while True:
-        out= fibb(i)
+        out= list(fibb(i))[i-1]
         if out<N:
             i += 1
             print(out, end=' ')
@@ -57,10 +59,9 @@ def main():
             break
         
     if choice==1:
-        for i in range(1,num+1):
-            print(fibb(i), end=' ')
+        for i in fibb(num):
+            print(i, end=' ')
     else:
         upper(num)
 
 main()
-
